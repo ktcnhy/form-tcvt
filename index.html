@@ -35,7 +35,7 @@
 
       <div class="col-md-4 offset-md-4">
         <label for="formFile" class="form-label">Tệp đính kèm</label>
-        <input id="file" class="form-control" type="file" onchange="saveFile(this)" required/>
+        <input id="file" class="form-control" type="file"  required/>
       </div>
 
       <div class="col-md-4 offset-md-4">
@@ -79,6 +79,8 @@
     }
 
     function submitForm(formObject){
+    const file = document.getElementById("file").value;
+    saveFile(file);
     document.getElementById("myForm").reset();
     window.alert("Dữ liệu đang gửi lên hệ thống")
     window.Telegram.WebApp.close();
