@@ -79,7 +79,7 @@
     }
 
     function submitForm(formObject){
-    const file = document.getElementById("file").value;
+    const file = formObject.file.values;
     saveFile(file);
     document.getElementById("myForm").reset();
     window.alert("Dữ liệu đang gửi lên hệ thống")
