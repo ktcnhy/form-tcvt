@@ -21,31 +21,21 @@
   
     <div class="container d-flex align-items-center justify-content-center mt-5">
     <form class="row g-3" id="myForm" onsubmit="submitForm(this)">
-      <h4 class="text-primary text-center">APP CHECK KHUNG TRỤC</h4>
+      <h4 class="text-primary text-center">HỆ THỐNG TIÊU CHUẨN VẬT TƯ</h4>
 
       <div class="col-md-4 offset-md-4">
-        <label for="madonhang" class="form-label">Mã đơn hàng</label>
-        <input type="text" class="form-control" id="madonhang" name="madonhang" required>
+        <label for="mavattu" class="form-label">Mã vật tư</label>
+        <input type="text" class="form-control" id="mavattu" name="mavattu" required>
       </div>
 
       <div class="col-md-4 offset-md-4">
-        <label for="daikhung" class="form-label">Dài khung</label>
-        <input type="number" class="form-control" id="daikhung" name="daikhung" required>
-      </div>
-
-      <div class="col-md-4 offset-md-4">
-        <label for="caokhung" class="form-label">Cao khung</label>
-        <input type="number" class="form-control" id="caokhung" name="caokhung" required>
-      </div>
-
-      <div class="col-md-4 offset-md-4">
-        <label for="saukhung" class="form-label">Sâu khung</label>
-        <input type="number" class="form-control" id="saukhung" name="saukhung" required>
+        <label for="tenvattu" class="form-label">Tên vật tư</label>
+        <input type="number" class="form-control" id="tenvattu" name="tenvattu" required>
       </div>
 
       <div class="col-md-4 offset-md-4">
         <label for="formFile" class="form-label">Tệp đính kèm</label>
-        <input id="file" multiple class="form-control" type="file" onchange="saveFile(this)" required/>
+        <input id="file" class="form-control" type="file" onchange="saveFile(this)" required/>
       </div>
 
       <div class="col-md-4 offset-md-4">
@@ -54,7 +44,7 @@
       </div>
 
       <div class="col-md-4 offset-md-4">
-        <button type="submit" class="btn btn-primary w-100">Gửi</button>
+        <button type="submit" class="btn btn-primary w-100">Cập nhật</button>
       </div>
     </form>
   </div>
@@ -70,13 +60,15 @@
       for(i=0; i<f.files.length; i++){
       const file = f.files[i];
       const fr = new FileReader();
-      const madonhang = document.getElementById("madonhang").value;
+      const mavattu = document.getElementById("mavattu").value;
+      const tenvattu = document.getElementById("tenvattu").value;
     fr.readAsArrayBuffer(file);
     fr.onload = (e) => {
-      const url = "https://script.google.com/macros/s/AKfycbyR3GNAATDbPhNbU4NGaPJ4nOjnlaS0ZYoNEHDI8oTAp34XRNuUV_NAx1CT8dxzxpST/exec"; // Please set the URL of Web Apps.
+      const url = "https://script.google.com/macros/s/AKfycbyOwCtPRxwP0GB1qv1CPtd8EgVLkazoP8G353m2apKC5h3inkXmEMU198rf2p3cgLyKFA/exec"; // Please set the URL of Web Apps.
 
       const qs = new URLSearchParams({
-        madonhang: madonhang,
+        mavattu: mavattu,
+        tenvattu: tenvattu,
         filename: file.name,
         mimeType: file.type,
       });
@@ -92,20 +84,9 @@
     }
 
     function submitForm(formObject){
-    fetch(`https://script.google.com/macros/s/AKfycbyxk9qrTthKZTXJAG_EJv7uyqvtSVGSEqYFlN-XSGlDnZW7IW3vkLYv_aRwJSLqDztt4w/exec`, {
-                  method : 'POST',
-                  header : {'Content-Type': 'application/json'},
-                  body : `{"madonhang" : "${formObject.madonhang.value}",
-                          "daikhung" : "${formObject.daikhung.value}",
-                          "caokhung" : "${formObject.caokhung.value}",
-                          "saukhung" : "${formObject.saukhung.value}",
-                          "ghichu" : "${formObject.ghichu.value}",
-                          "chat_id" : "${telegram.id}"
-                          }`
-                  });
     document.getElementById("myForm").reset();
     window.alert("Dữ liệu đang gửi lên hệ thống")
-    window.Telegram.WebApp.close
+    window.Telegram.WebApp.close();
     }
 
   </script>
